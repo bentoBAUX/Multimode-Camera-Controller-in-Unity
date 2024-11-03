@@ -8,14 +8,14 @@ using UnityEngine.Serialization;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCameraBase _vCam1;
-    [SerializeField] private CinemachineVirtualCameraBase _vCam2;
-    [SerializeField] private CinemachineVirtualCameraBase _vCam3;
+    [SerializeField] private CinemachineVirtualCameraBase _TPS;
+    [SerializeField] private CinemachineVirtualCameraBase _FPS;
+    [SerializeField] private CinemachineVirtualCameraBase _RTS;
 
     private bool cam1 = true;
     private void Start()
     {
-        SwitchToVCam1();
+        SwitchToTPS();
     }
 
     void Update()
@@ -25,11 +25,13 @@ public class CameraManager : MonoBehaviour
             InputHandler.Instance.SetRTSCameraMode(false);
             if (cam1)
             {
-                SwitchToVCam2();
+                InputHandler.Instance.SetFPSCameraMode(true);
+                SwitchToFPS();
             }
             else
             {
-                SwitchToVCam1();
+                InputHandler.Instance.SetFPSCameraMode(false);
+                SwitchToTPS();
             }
 
             cam1 = !cam1;
@@ -38,32 +40,32 @@ public class CameraManager : MonoBehaviour
         if (InputHandler.Instance.IsSwitchingToRTS())
         {
             InputHandler.Instance.SetRTSCameraMode(true);
-            SwitchToVCam3();
+            SwitchToRTS();
         }
     }
 
-    public void SwitchToVCam1()
+    public void SwitchToTPS()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        _vCam1.Priority = 20;
-        _vCam2.Priority = 10;
-        _vCam3.Priority = 5;
+        _TPS.Priority = 20;
+        _FPS.Priority = 10;
+        _RTS.Priority = 5;
     }
 
-    public void SwitchToVCam2()
+    public void SwitchToFPS()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        _vCam1.Priority = 10;
-        _vCam2.Priority = 20;
-        _vCam3.Priority = 5;
+        _TPS.Priority = 10;
+        _FPS.Priority = 20;
+        _RTS.Priority = 5;
 
     }
 
-    public void SwitchToVCam3()
+    public void SwitchToRTS()
     {
         Cursor.lockState = CursorLockMode.None;
-        _vCam1.Priority = 10;
-        _vCam2.Priority = 20;
-        _vCam3.Priority = 30;
+        _TPS.Priority = 10;
+        _FPS.Priority = 20;
+        _RTS.Priority = 30;
     }
 }

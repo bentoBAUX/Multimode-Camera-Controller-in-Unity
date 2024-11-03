@@ -7,17 +7,17 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     private CharacterController _controller;
-    [FormerlySerializedAs("playerVelocity")] [SerializeField]
+    [SerializeField]
     private Vector3 _playerVelocity;
-    [FormerlySerializedAs("groundedPlayer")] [SerializeField]
+    [SerializeField]
     private bool _groundedPlayer;
-    [FormerlySerializedAs("playerSpeed")] [SerializeField]
+    [SerializeField]
     private float _playerSpeed = 2.0f;
-    [FormerlySerializedAs("jumpHeight")] [SerializeField]
+    [SerializeField]
     private float _jumpHeight = 1.0f;
-    [FormerlySerializedAs("gravityValue")] [SerializeField]
+    [SerializeField]
     private float _gravityValue = -9.81f;
-    [FormerlySerializedAs("rotationSpeed")] [SerializeField] private float _rotationSpeed = 4f;
+    [SerializeField] private float _rotationSpeed = 4f;
     private Transform _cameraMainTransform;
 
     private void Start()
@@ -34,11 +34,23 @@ public class PlayerController : MonoBehaviour
             _playerVelocity.y = 0f;
         }
 
-        Vector2 movement = InputHandler.Instance.GetMovementInput();
-        Vector3 move = new Vector3(movement.x, 0, movement.y);
-        move = _cameraMainTransform.forward * move.z + _cameraMainTransform.right * move.x;
-        move.y = 0f;
-        _controller.Move(move * Time.deltaTime * _playerSpeed);
+        Vector2 movementInput = InputHandler.Instance.GetMovementInput();
+        Vector3 move = new Vector3(movementInput.x, 0, movementInput.y);
+        // Convert move direction to be relative to the camera’s facing direction
+        Vector3 forward = InputHandler.IsRTSCameraMode ? _cameraMainTransform.up : _cameraMainTransform.forward;
+        Vector3 right = _cameraMainTransform.right;
+
+        // Normalize forward and right to ensure consistent movement speed
+
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+
+
+        // Calculate movement direction based on camera orientation
+        Vector3 movement = forward * move.z + right * move.x;
+        _controller.Move(movement * Time.deltaTime * _playerSpeed);
 
         // Makes the player jump
         if (InputHandler.Instance.IsJumping() && _groundedPlayer)
@@ -49,11 +61,20 @@ public class PlayerController : MonoBehaviour
         _playerVelocity.y += _gravityValue * Time.deltaTime;
         _controller.Move(_playerVelocity * Time.deltaTime);
 
-        if (movement != Vector2.zero)
+        if (InputHandler.IsFPSCameraMode)
         {
-            float targetAngle = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg + _cameraMainTransform.eulerAngles.y;
-            Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * _rotationSpeed);
+            Quaternion targetRotation = Quaternion.Euler(0, _cameraMainTransform.eulerAngles.y, 0);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
         }
+        else
+        {
+            if (movementInput != Vector2.zero)
+            {
+                float targetAngle = Mathf.Atan2(movementInput.x, movementInput.y) * Mathf.Rad2Deg;
+                Quaternion rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * _rotationSpeed);
+            }
+        }
+
     }
 }

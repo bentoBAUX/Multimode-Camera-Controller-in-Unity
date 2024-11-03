@@ -5,6 +5,7 @@ public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance { get; private set; }
     public static bool IsRTSCameraMode { get; private set; } = false;
+    public static bool IsFPSCameraMode { get; private set; } = false;
 
     [Header("Input Actions")]
     public InputActionReference movementAction;
@@ -80,6 +81,13 @@ public class InputHandler : MonoBehaviour
 
     public void SetRTSCameraMode(bool isRTS)
     {
+        Debug.Log("RTS: " + isRTS);
         IsRTSCameraMode = isRTS;
+    }
+
+    public void SetFPSCameraMode(bool isFPS)
+    {
+        Debug.Log("FPS: " + isFPS);
+        IsFPSCameraMode = isFPS;
     }
 }
