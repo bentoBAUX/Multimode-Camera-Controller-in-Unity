@@ -11,6 +11,9 @@ public class PanAndZoom : MonoBehaviour
     private Transform _cameraTransform;
 
     [SerializeField] private float _panSpeed = 2f;
+    [SerializeField] private float _zoomSpeed = 3f;
+    [SerializeField] private float _zoomInMax = 40f;
+    [SerializeField] private float _zoomOutMax = 90f;
 
     private void Awake()
     {
@@ -21,7 +24,19 @@ public class PanAndZoom : MonoBehaviour
 
     private void Update()
     {
-        float x;
+        float x = InputHandler.Instance.GetPanInput().x;
+        float y = InputHandler.Instance.GetPanInput().y;
+        float z = InputHandler.Instance.GetZoomInput();
+
+        if (x != 0 || y != 0)
+        {
+            PanScreen(x, y);
+        }
+
+        if (z != 0)
+        {
+            ZoomScreen(z);
+        }
     }
 
     public Vector2 PanDirection(float x, float y)
@@ -51,6 +66,13 @@ public class PanAndZoom : MonoBehaviour
     {
         Vector2 direction = PanDirection(x, y);
         _cameraTransform.position = Vector3.Lerp(_cameraTransform.position,
-            _cameraTransform.position + (Vector3)direction, Time.deltaTime * _panSpeed);
+            _cameraTransform.position + new Vector3(direction.x, 0, direction.y), Time.deltaTime * _panSpeed);
+    }
+
+    public void ZoomScreen(float z)
+    {
+        float fov = _virtualCamera.m_Lens.FieldOfView;
+        float target = Mathf.Clamp(fov + z, _zoomInMax, _zoomOutMax);
+        _virtualCamera.m_Lens.FieldOfView = Mathf.Lerp(fov, target, _zoomSpeed * Time.deltaTime);
     }
 }

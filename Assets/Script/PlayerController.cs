@@ -6,8 +6,6 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [FormerlySerializedAs("movementControl")] [SerializeField] private InputActionReference _movementControl;
-    [FormerlySerializedAs("jumpControl")] [SerializeField] private InputActionReference _jumpControl;
     private CharacterController _controller;
     [FormerlySerializedAs("playerVelocity")] [SerializeField]
     private Vector3 _playerVelocity;
@@ -24,7 +22,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         _cameraMainTransform = Camera.main.transform;
         _controller = gameObject.GetComponent<CharacterController>();
     }
