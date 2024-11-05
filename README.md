@@ -25,14 +25,14 @@ Each mode is designed with unique functionality:
 - **RTS View**: A top-down, bird’s-eye view, ideal for strategy and management games.
 
 ## How It Works
-This camera controller leverages Unity's Cinemachine package (if using) and the Unity Input System for flexible and reliable camera switching. The setup includes:
+This camera controller leverages Unity's Cinemachine package (if using) and the Unity Input System for flexible and reliable camera switching. <br/> <br/> The setup includes:
 
 - A singleton [InputHandler](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/Assets/Script/InputHandler.cs) to manage keybinds and input checks.
 - Camera switching logic in [CameraManager](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/Assets/Script/CameraManager.cs) that adjusts the priorities of different CinemachineVirtualCamera components to control which camera is currently active. By modifying the priority, only the desired camera view is shown at any time, providing smooth transitions.
 - Different Cinemachine cameras for different views:
-    - TPS: **CinemachineFreeLook**
-    - FPS: **CinemachineVirtualCamera** -> Body: "Hard Lock To Target"
-    - RTS: **CinemachineVirtualCamera** -> Body: "Do Nothing" *(PS: I added some script to make sure that the player is in view when RTS is activated)*
+    - **Third-Person View**: CinemachineFreeLook
+    - **First-Person View**: CinemachineVirtualCamera $\rightarrow$ Body: "Hard Lock To Target"
+    - **RTS View**: CinemachineVirtualCamera $\rightarrow$ Body: "Do Nothing" *(PS: I added some code to make sure that the player is in view when RTS is activated)*
 
 ## Requirements
 This project was made in Unity 2022.3.13f1 URP.
