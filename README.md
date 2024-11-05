@@ -1,9 +1,7 @@
 ## Multimode Camera Controller in Unity
-
-This project demonstrates a versatile camera controller for Unity that enables seamless switching between First-Person, Third-Person, and Real-Time Strategy (RTS) perspectives. Ideal for games with hybrid gameplay styles, this setup provides a flexible and customizable foundation for multi-perspective experiences. <br/>
-
 [![Showcase video](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/Assets/Images/Thumbnail%20w%20Text.png)](https://youtu.be/8V7OshjtFNM)
 
+This project demonstrates a versatile camera controller for Unity that enables seamless switching between First-Person, Third-Person, and Real-Time Strategy (RTS) perspectives. Ideal for games with hybrid gameplay styles, this setup provides a flexible and customizable foundation for multi-perspective experiences. <br/>
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Controls](#controls)
