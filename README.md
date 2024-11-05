@@ -8,7 +8,6 @@ This project demonstrates a versatile camera controller for Unity that enables s
 - [Getting Started](#getting-started)
 - [Controls](#controls)
 - [How It Works](#how-it-works)
-- [Customization](#customization)
 - [Requirements](#requirements)
 - [License](#license)
 
@@ -30,7 +29,10 @@ This camera controller leverages Unity's Cinemachine package (if using) and the 
 
 - A singleton [InputHandler](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/Assets/Script/InputHandler.cs) to manage keybinds and input checks.
 - Camera switching logic in [CameraManager](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/Assets/Script/CameraManager.cs) that adjusts the priorities of different CinemachineVirtualCamera components to control which camera is currently active. By modifying the priority, only the desired camera view is shown at any time, providing smooth transitions.
-- Body components for CinemachineVirtualCamera that activate different views, including framing transposers for TPS and FPS, and top-down controls for RTS mode.
+- Different Cinemachine cameras for different views:
+    - TPS: **CinemachineFreeLook**
+    - FPS: **CinemachineVirtualCamera** -> Body: "Hard Lock To Target"
+    - RTS: **CinemachineVirtualCamera** -> Body: "Do Nothing" *(PS: I added some script to make sure that the player is in view when RTS is activated)*
 
 ## Requirements
 This project was made in Unity 2022.3.13f1 URP.
