@@ -12,7 +12,7 @@ This project demonstrates a versatile camera controller for Unity that enables s
 - [License](#license)
 
 ## Getting Started
-Clone or download the project files and open it in Unity. This project is set up with Unity’s Input System, so make sure it’s installed and configured in your Unity project.
+Clone or download the project files and open it in Unity. This project is set up with Unity’s Input System, so make sure it’s installed and configured in your Unity project. Or you can simply download the release, if you just want to test out the camera controller.
 
 ## Controls
 - **Sprint**: Hold "*Shift*" on your keyboard.
