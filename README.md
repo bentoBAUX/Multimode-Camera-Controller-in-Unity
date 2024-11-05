@@ -14,6 +14,7 @@ This project demonstrates a versatile camera controller for Unity that enables s
 Clone or download the project files and open it in Unity. This project is set up with Unity’s Input System, so make sure it’s installed and configured in your Unity project.
 
 ## Controls
+- **Sprint**: Hold "*Shift*" on your keyboard.
 - **Switch between First-Person and Third-Person**: Press '*C*' on your keyboard.
 - **Switch to RTS Mode**: Press '*V*' on your keyboard to switch from either FPS or TPS to RTS mode.
 Each mode is designed with unique functionality:
