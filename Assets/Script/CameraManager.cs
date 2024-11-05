@@ -23,7 +23,7 @@ public class CameraManager : MonoBehaviour
         if (InputHandler.Instance.IsSwitchingCamera())
         {
             InputHandler.Instance.SetRTSCameraMode(false);
-            if (cam1)
+            if (cam1)                                                   // Switches back and forth from FPS to Third Person.
             {
                 InputHandler.Instance.SetFPSCameraMode(true);
                 SwitchToFPS();
@@ -41,6 +41,7 @@ public class CameraManager : MonoBehaviour
         {
             InputHandler.Instance.SetRTSCameraMode(true);
             SwitchToRTS();
+            cam1 = !cam1;                                              // This ensures that camera returns back to previous camera type before switching to RTS.
         }
     }
 

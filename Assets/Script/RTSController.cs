@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class PanAndZoom : MonoBehaviour
+public class RTSController : MonoBehaviour
 {
     private CinemachineInputProvider _inputProvider;
     private CinemachineVirtualCamera _virtualCamera;
@@ -17,13 +17,13 @@ public class PanAndZoom : MonoBehaviour
     [SerializeField] private float _zoomSpeed = 3f;
     [SerializeField] private float _zoomInMax = 40f;
     [SerializeField] private float _zoomOutMax = 90f;
+    [SerializeField] private float _transitionSmoothness = 3f;
 
     private void Awake()
     {
         _inputProvider = GetComponent<CinemachineInputProvider>();
         _virtualCamera = GetComponent<CinemachineVirtualCamera>();
         _cameraTransform = _virtualCamera.VirtualCameraGameObject.transform;
-
     }
 
     private void Start()
@@ -36,7 +36,7 @@ public class PanAndZoom : MonoBehaviour
         if (!InputHandler.IsRTSCameraMode)
         {
             this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(_playerTransform.position.x, this.transform.position.y,
-                _playerTransform.position.z), Time.deltaTime * 3.0f);
+                _playerTransform.position.z), Time.deltaTime * _transitionSmoothness);
         }
 
 

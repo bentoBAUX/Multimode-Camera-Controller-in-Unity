@@ -89,13 +89,11 @@ public class InputHandler : MonoBehaviour
 
     public void SetRTSCameraMode(bool isRTS)
     {
-        Debug.Log("RTS: " + isRTS);
         IsRTSCameraMode = isRTS;
     }
 
     public void SetFPSCameraMode(bool isFPS)
     {
-        Debug.Log("FPS: " + isFPS);
         IsFPSCameraMode = isFPS;
     }
 }
