@@ -1,17 +1,16 @@
 ## Multimode Camera Controller in Unity
+[![Showcase video](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/Assets/Images/Thumbnail%20w%20Text.png)](https://youtu.be/8V7OshjtFNM)
 
-This project demonstrates a versatile camera controller for Unity that enables seamless switching between First-Person, Third-Person, and Real-Time Strategy (RTS) perspectives. Ideal for games with hybrid gameplay styles, this setup provides a flexible and customizable foundation for multi-perspective experiences.
-
+This project demonstrates a versatile camera controller for Unity that enables seamless switching between First-Person, Third-Person, and Real-Time Strategy (RTS) perspectives. Ideal for games with hybrid gameplay styles, this setup provides a flexible and customizable foundation for multi-perspective experiences. <br/>
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Controls](#controls)
 - [How It Works](#how-it-works)
-- [Customization](#customization)
 - [Requirements](#requirements)
 - [License](#license)
 
 ## Getting Started
-Clone or download the project files and open it in Unity. This project is set up with Unity’s Input System, so make sure it’s installed and configured in your Unity project.
+Clone or download the project files and open it in Unity. This project is set up with Unity’s Input System, so make sure it’s installed and configured in your Unity project. Alternatively, the release is available for download, should you wish to test out the project.
 
 ## Controls
 - **Sprint**: Hold "*Shift*" on your keyboard.
@@ -24,11 +23,14 @@ Each mode is designed with unique functionality:
 - **RTS View**: A top-down, bird’s-eye view, ideal for strategy and management games.
 
 ## How It Works
-This camera controller leverages Unity's Cinemachine package (if using) and the Unity Input System for flexible and reliable camera switching. The setup includes:
+This camera controller leverages Unity's Cinemachine package and the Unity Input System for flexible and reliable camera switching. <br/> <br/> The setup includes:
 
 - A singleton [InputHandler](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/Assets/Script/InputHandler.cs) to manage keybinds and input checks.
 - Camera switching logic in [CameraManager](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/Assets/Script/CameraManager.cs) that adjusts the priorities of different CinemachineVirtualCamera components to control which camera is currently active. By modifying the priority, only the desired camera view is shown at any time, providing smooth transitions.
-- Body components for CinemachineVirtualCamera that activate different views, including framing transposers for TPS and FPS, and top-down controls for RTS mode.
+- Different Cinemachine cameras for different views:
+    - **Third-Person View**: CinemachineFreeLook
+    - **First-Person View**: CinemachineVirtualCamera $\rightarrow$ Body: "Hard Lock To Target"
+    - **RTS View**: CinemachineVirtualCamera $\rightarrow$ Body: "Do Nothing" *(PS: I added some code to make sure that the player is in view when RTS is activated)*
 
 ## Requirements
 This project was made in Unity 2022.3.13f1 URP.
