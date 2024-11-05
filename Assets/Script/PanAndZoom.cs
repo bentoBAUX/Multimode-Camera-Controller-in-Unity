@@ -10,6 +10,9 @@ public class PanAndZoom : MonoBehaviour
     private CinemachineVirtualCamera _virtualCamera;
     private Transform _cameraTransform;
 
+    private CinemachineComponentBase _framingTransposer;
+
+    [SerializeField] private Transform _playerTransform;
     [SerializeField] private float _panSpeed = 2f;
     [SerializeField] private float _zoomSpeed = 3f;
     [SerializeField] private float _zoomInMax = 40f;
@@ -20,10 +23,23 @@ public class PanAndZoom : MonoBehaviour
         _inputProvider = GetComponent<CinemachineInputProvider>();
         _virtualCamera = GetComponent<CinemachineVirtualCamera>();
         _cameraTransform = _virtualCamera.VirtualCameraGameObject.transform;
+
+    }
+
+    private void Start()
+    {
+        _framingTransposer = _virtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body);
     }
 
     private void Update()
     {
+        if (!InputHandler.IsRTSCameraMode)
+        {
+            this.transform.position = Vector3.Lerp(this.transform.position, new Vector3(_playerTransform.position.x, this.transform.position.y,
+                _playerTransform.position.z), Time.deltaTime * 3.0f);
+        }
+
+
         float x = InputHandler.Instance.GetPanInput().x;
         float y = InputHandler.Instance.GetPanInput().y;
         float z = InputHandler.Instance.GetZoomInput();

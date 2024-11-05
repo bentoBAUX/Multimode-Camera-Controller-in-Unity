@@ -15,15 +15,18 @@ public class PlayerController : MonoBehaviour
     private float _playerSpeed = 2.0f;
     [SerializeField]
     private float _jumpHeight = 1.0f;
+
+    [SerializeField] private float _sprintMultiplier = 1.5f;
     [SerializeField]
     private float _gravityValue = -9.81f;
     [SerializeField] private float _rotationSpeed = 4f;
     private Transform _cameraMainTransform;
-
+    private float _targetSpeed;
     private void Start()
     {
         _cameraMainTransform = Camera.main.transform;
         _controller = gameObject.GetComponent<CharacterController>();
+        _targetSpeed = _playerSpeed;
     }
 
     void Update()
@@ -47,10 +50,11 @@ public class PlayerController : MonoBehaviour
         forward.Normalize();
         right.Normalize();
 
+        float _targetSpeed = InputHandler.Instance.IsSprinting() ? _sprintMultiplier * _playerSpeed : _playerSpeed;
 
         // Calculate movement direction based on camera orientation
-        Vector3 movement = forward * move.z + right * move.x;
-        _controller.Move(movement * Time.deltaTime * _playerSpeed);
+        Vector3 movement = (forward * move.z + right * move.x).normalized;
+        _controller.Move(movement * Time.deltaTime * _targetSpeed);
 
         // Makes the player jump
         if (InputHandler.Instance.IsJumping() && _groundedPlayer)
@@ -75,6 +79,6 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * _rotationSpeed);
             }
         }
-
+        Debug.Log(_targetSpeed);
     }
 }

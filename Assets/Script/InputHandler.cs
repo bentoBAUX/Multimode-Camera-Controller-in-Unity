@@ -10,6 +10,7 @@ public class InputHandler : MonoBehaviour
     [Header("Input Actions")]
     public InputActionReference movementAction;
     public InputActionReference jumpAction;
+    public InputActionReference sprintAction;
     public InputActionReference panAction;
     public InputActionReference zoomAction;
     public InputActionReference switchCameraAction;
@@ -33,6 +34,7 @@ public class InputHandler : MonoBehaviour
     {
         movementAction.action.Enable();
         jumpAction.action.Enable();
+        sprintAction.action.Enable();
         panAction.action.Enable();
         zoomAction.action.Enable();
         switchCameraAction.action.Enable();
@@ -43,6 +45,7 @@ public class InputHandler : MonoBehaviour
     {
         movementAction.action.Disable();
         jumpAction.action.Disable();
+        sprintAction.action.Disable();
         panAction.action.Disable();
         zoomAction.action.Disable();
         switchCameraAction.action.Disable();
@@ -57,6 +60,11 @@ public class InputHandler : MonoBehaviour
     public bool IsJumping()
     {
         return jumpAction.action.triggered; // Checks if the jump button was pressed
+    }
+
+    public bool IsSprinting()
+    {
+        return sprintAction.action.IsPressed();
     }
 
     public bool IsSwitchingCamera()
