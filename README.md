@@ -35,4 +35,4 @@ This project was made in Unity 2022.3.13f1 URP.
 - Unity Input System package.
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/bentoBAUX/Multimode-Camera-Controller-in-Unity/blob/master/LICENSE) file for details.
