@@ -39,7 +39,7 @@ public class RTSController : MonoBehaviour
                 _playerTransform.position.z), Time.deltaTime * _transitionSmoothness);
         }
 
-
+        // From here on by samyam: https://youtu.be/PsAbHoB85hM
         float x = InputHandler.Instance.GetPanInput().x;
         float y = InputHandler.Instance.GetPanInput().y;
         float z = InputHandler.Instance.GetZoomInput();

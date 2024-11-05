@@ -54,12 +54,12 @@ public class InputHandler : MonoBehaviour
 
     public Vector2 GetMovementInput()
     {
-        return movementAction.action.ReadValue<Vector2>(); // Reads WASD or joystick input
+        return movementAction.action.ReadValue<Vector2>();
     }
 
     public bool IsJumping()
     {
-        return jumpAction.action.triggered; // Checks if the jump button was pressed
+        return jumpAction.action.triggered;
     }
 
     public bool IsSprinting()
@@ -69,7 +69,7 @@ public class InputHandler : MonoBehaviour
 
     public bool IsSwitchingCamera()
     {
-        return switchCameraAction.action.triggered; // Checks if camera switch was triggered
+        return switchCameraAction.action.triggered;
     }
 
     public Vector2 GetPanInput()

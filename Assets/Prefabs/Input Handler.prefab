@@ -48,6 +48,8 @@ MonoBehaviour:
     type: 3}
   jumpAction: {fileID: -2922260707816430123, guid: c986a997d946cf04b8ebf956a2a2e898,
     type: 3}
+  sprintAction: {fileID: 8753171454276481207, guid: c986a997d946cf04b8ebf956a2a2e898,
+    type: 3}
   panAction: {fileID: 9156508360898348377, guid: c986a997d946cf04b8ebf956a2a2e898,
     type: 3}
   zoomAction: {fileID: 6861643802844128501, guid: c986a997d946cf04b8ebf956a2a2e898,

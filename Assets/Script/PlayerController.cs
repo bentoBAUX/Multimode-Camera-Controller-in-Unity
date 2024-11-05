@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
         } else                                                                                                               // In RTS, the player doesn't have to rotate based on where the camera is looking at.
         {
+            // Cinemachine Third Person Controller w/ Input System - Unity Tutorial, by samyam: https://youtu.be/ImuCx_XVaEQ?t=1044
             if (movementInput != Vector2.zero)
             {
                 float targetAngle = Mathf.Atan2(movementInput.x, movementInput.y) * Mathf.Rad2Deg;
